@@ -2,21 +2,15 @@ import cosas.*
 
 object casaDePepeYJulian {
     const cosas = []
-    var property cuentaActual = cuentaCorriente
+    var cuentaActual = cuentaCorriente
+
 
     method asignarCuenta(cuenta) {
         cuentaActual = cuenta
     }
 
-    method depositar(_depositar) {
-        cuentaActual.depositar(_depositar)
-    }
-
-    method extraer(_depositar) {
-        cuentaActual.extraer(_depositar)
-    }
-
     method comprar(cosa) {
+        cuentaActual.extraer(cosa.precio())  
         cosas.add(cosa)
     }
 
@@ -29,7 +23,7 @@ object casaDePepeYJulian {
     }
 
     method tieneAlgun(categoria) {
-        return cosas.any ( {cosa => cosa.categoria() == categoria} )
+        return cosas.any ({cosa => cosa.esDeLaCategoria(categoria)}) 
     }
 
     method vieneDeComprar(categoria) {
@@ -44,12 +38,12 @@ object casaDePepeYJulian {
         return cosas.max ( {cosa => cosa.precio()} )
     }
     
-    method comprados(categoria) {
-        return cosas.filter ( { cosa => cosa.categoria() == categoria } )
+    method comprados(categoria) {   
+        return cosas.filter ( { cosa => cosa.esDeLaCategoria(categoria)}) 
     }
 
     method malaEpoca() {
-        return cosas.all ( { cosa => cosa.categoria().esComida() } )
+        return cosas.all ( { cosa => cosa.esDeLaCategoria(comida) } )
     }
 
     method queFaltaComprar(lista) {
@@ -57,7 +51,7 @@ object casaDePepeYJulian {
     }
 
     method faltaComida() {
-      const comidas = cosas.filter ({ cosa => cosa.categoria().esComida()})
+      const comidas = cosas.filter ({ cosa => cosa.esDeLaCategoria(comida)})
       return comidas.size() <= 2
     }
     
@@ -68,56 +62,55 @@ object casaDePepeYJulian {
 }
 
 object cuentaCorriente {
-    var property saldo = 20
+    var saldo = 20
 
-    method depositar(_depositar) {
-        self.validarMontoPositivo(_depositar)
-	    saldo = saldo + _depositar
+    method saldo() {
+        return saldo
     }
-
-    method validarMontoPositivo(monto) {
-        if (monto < 0) {
-		self.error ("La cantidad debe ser positiva")
-        }
+    method depositar(monto) {
+	    saldo = saldo + monto
     }
 
     method extraer(_extraer) {
-        self.validarMontoPositivo(_extraer)
         self.validarSiSePuedeExtraer(_extraer)
         saldo = saldo - _extraer
     }
 
     method validarSiSePuedeExtraer(monto) {
-        if (monto > saldo) {
+        if (not self.puedeExtraer(monto)) {
             self.error ("No hay suficiente saldo")
         }
+    }
+
+    method puedeExtraer(monto) {
+        return monto <= saldo
     }
 }
 
 object cuentaConGastos {
-    var property saldo = 500
+    var saldo = 500
     const costoOperacion = 20
 
+    method saldo() {
+        return saldo
+    }
+
     method depositar(_depositar) {
-        self.validarMontoPositivo(_depositar)
         self.validarLimiteDeposito(_depositar)
         saldo = saldo + _depositar - costoOperacion
     }
 
     method validarLimiteDeposito(monto) {
-        if (monto > 1000) {
+        if (not self.puedeDepositar(monto)) {
             self.error ("Excediste el limite de deposito")
         }
     }
 
-    method validarMontoPositivo(monto) {
-        if (monto < 0) {
-		self.error ("La cantidad debe ser positiva")
-        }
+    method puedeDepositar(monto) {
+        return monto <= 1000 
     }
 
     method extraer(_extraer) {
-        self.validarMontoPositivo(_extraer)
         saldo = saldo - _extraer
     }
 }

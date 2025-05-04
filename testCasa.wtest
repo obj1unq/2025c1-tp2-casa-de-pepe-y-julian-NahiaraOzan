@@ -3,85 +3,127 @@ import cosas.*
 
 describe "casa parte 1" {
     test "la lista de las cosas compradas es heladera, cama y plancha" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
         assert.equals([heladera, cama, plancha], casaDePepeYJulian.cosas())
     }
     test "cantidad de cosas compradas es 3" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
         assert.equals(3, casaDePepeYJulian.cantidadDeCosasCompradas())
     }
     test "tiene algún electrodoméstico" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals(true, casaDePepeYJulian.tieneAlgun(electrodomestico))
+        assert.that(casaDePepeYJulian.tieneAlgun(electrodomestico))
     }
     test "tiene algún mueble" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals(true, casaDePepeYJulian.tieneAlgun(mueble))
+        assert.that(casaDePepeYJulian.tieneAlgun(mueble))
     }
     test "no tiene alguna comida" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals(false, casaDePepeYJulian.tieneAlgun(comida))
+        assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
     }
     test "Si le preguntan si viene de comprar un electrodoméstico dice que sí, pero si le preguntan si viene de comprar un mueble dice que no" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals(true, casaDePepeYJulian.vieneDeComprar(electrodomestico))
-        assert.equals(false, casaDePepeYJulian.vieneDeComprar(mueble))
+        assert.that(casaDePepeYJulian.vieneDeComprar(electrodomestico))
+        assert.notThat(casaDePepeYJulian.vieneDeComprar(mueble))
     }
     test "Es derrochona (ya que gastó 29200)" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals(true, casaDePepeYJulian.esDerrochona())
+        assert.that(casaDePepeYJulian.esDerrochona())
     }
     test "los electrodomésticos compramos son la heladera y la plancha" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
         assert.equals( [heladera, plancha], casaDePepeYJulian.comprados(electrodomestico))
     }
     test "los muebles comprados son: la cama y nada más" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
         assert.equals( [cama], casaDePepeYJulian.comprados(mueble))
     }
     test "no hay comida comprada" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals( [], casaDePepeYJulian.comprados(comida))
+        assert.that(casaDePepeYJulian.comprados(comida).isEmpty())
     }
     test "no es una mala época" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals( false, casaDePepeYJulian.malaEpoca())
+        assert.notThat(casaDePepeYJulian.malaEpoca())
     }
     test "si le preguntamos que falta comprar de una tira de asado, una plancha y un paquete de fideos debe contestar que falta la tira de asado y el paquete de fideos." {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals( [tiraDeAsado, paqueteDeFideos], casaDePepeYJulian.queFaltaComprar([tiraDeAsado, plancha, paqueteDeFideos]))
+        assert.equals( #{tiraDeAsado, paqueteDeFideos}, casaDePepeYJulian.queFaltaComprar(#{tiraDeAsado, plancha, paqueteDeFideos}))
     }
     test "falta comida" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
-        assert.equals( true, casaDePepeYJulian.faltaComida())
+        assert.that(casaDePepeYJulian.faltaComida())
     }
     test "las categorías compradas son electrodoméstico y mueble" {
+        cuentaCorriente.depositar(heladera.precio())
+        cuentaCorriente.depositar(cama.precio())
+        cuentaCorriente.depositar(plancha.precio())
         casaDePepeYJulian.comprar(heladera)
         casaDePepeYJulian.comprar(cama)
         casaDePepeYJulian.comprar(plancha)
@@ -93,26 +135,29 @@ describe "casa Parte 2" {
     
     test "si la cuenta tiene 20 de saldo, si se deposita 1000 pesos, el saldo queda en 1020 pesos, si luego se extre 50 queda en 970 pesos. 
             Si se intenta extraer 2000 debería lanzar error ya que no se puede cumplir la responsabilidad." {
-        casaDePepeYJulian.depositar(1000)
-        assert.equals(1020, casaDePepeYJulian.cuentaActual().saldo())
-        casaDePepeYJulian.extraer(50)
-        assert.equals(970, casaDePepeYJulian.cuentaActual().saldo())
-        assert.throwsException( { casaDePepeYJulian.extraer(2000) })
+        // como me habías  dicho que no era necesario el getter de cuenta actual asigné por defecto la cuenta corriente,
+        // ya que es el objeto que estoy validando, hice lo mismo con la otra cuenta
+        cuentaCorriente.depositar(1000)
+        assert.equals(1020, cuentaCorriente.saldo())
+        cuentaCorriente.extraer(50)
+        assert.equals(970, cuentaCorriente.saldo())
+        assert.throwsException( { cuentaCorriente.extraer(2000) })
+        assert.equals(970, cuentaCorriente.saldo())
     }
 
     test "para una cuenta con un saldo de 500 pesos y 20 pesos de costo por operación, si se deposita 1000 pesos, 
           el saldo queda en 1480 pesos. Si luego se extrae 30, queda en 1450. Después se eso se intenta depositar 2000, pero no se puede porque 
           violaría la regla de negocio, por lo que hay que verificar que se lance el error y que el saldo siga siendo de 1450. 
           Finalmente se extren 2000 pesos dejando el saldo en -550." {
-        casaDePepeYJulian.asignarCuenta(cuentaConGastos)
-        casaDePepeYJulian.depositar(1000)
-        assert.equals(1480, casaDePepeYJulian.cuentaActual().saldo())
-        casaDePepeYJulian.extraer(30)
-        assert.equals(1450, casaDePepeYJulian.cuentaActual().saldo())
-        assert.throwsException({casaDePepeYJulian.depositar(2000)})
-        assert.equals(1450, casaDePepeYJulian.cuentaActual().saldo())
-        casaDePepeYJulian.extraer(2000)
-        assert.equals(-550, casaDePepeYJulian.cuentaActual().saldo())
+        
+        cuentaConGastos.depositar(1000)
+        assert.equals(1480, cuentaConGastos.saldo())
+        cuentaConGastos.extraer(30)
+        assert.equals(1450, cuentaConGastos.saldo())
+        assert.throwsException({cuentaConGastos.depositar(2000)})
+        assert.equals(1450, cuentaConGastos.saldo())
+        cuentaConGastos.extraer(2000)
+        assert.equals(-550, cuentaConGastos.saldo())
     }
 }
 
